@@ -53,7 +53,7 @@ def parse_shared_count(raw_str):
 def get_shared_count(xpe, pipe, idx=None):
     query_str = "d MMU_WRED_PORT_SP_SHARED_COUNT_XPE{}_PIPE{} {} raw SHARED_COUNT".format(xpe, pipe, idx if idx is None else str(idx) + ' 1 ')
     response = ovs_query(query_str)
-    return parse_shared_count(response) 
+    return parse_shared_count(response)
 
 def scan():
     reported = set()
@@ -120,7 +120,7 @@ def main():
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     sock.connect("/var/run/openvswitch/ops-switchd.%d.ctl" % ovs_pid)
 
-    if scan:
+    if args.scan:
         scan()
     else:
         elapsed = timeit.timeit(benchmark, number=1)
@@ -134,4 +134,4 @@ def main():
 if __name__=="__main__":
     ret_code = main()
     sys.exit(ret_code)
-   
+
